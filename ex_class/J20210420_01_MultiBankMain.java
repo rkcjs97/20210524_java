@@ -1,0 +1,95 @@
+package ex_class;
+
+import java.util.Scanner;
+	
+public class J20210420_01_MultiBankMain {
+
+	public static void main(String[] args) {
+		// TODO 자동 생성된 메소드 스텁
+		Scanner sc = new Scanner(System.in);
+		Bank[] banks = new Bank[3];
+		int custno =0;
+		while(true){
+			System.out.println("------------");
+			System.out.println("0.고객번호 등록");
+			System.out.println("1.계좌개설");
+			System.out.println("2.입금");
+			System.out.println("3.출금");
+			System.out.println("4.잔액조회");
+			System.out.println("9.종료");
+			System.out.println("------------");
+			
+		
+			int n = sc.nextInt();
+			
+			switch(n){
+			case 0: System.out.print("고객번호를 입력하세요:"); 
+				custno = sc.nextInt();
+			
+			case 1:
+				System.out.println("------------");
+				System.out.print("이름:");
+				String bankname = sc.next();
+				System.out.print("계좌번호:");
+				String bankno = sc.next();
+				banks[custno-1] = new Bank(bankname, bankno);
+				System.out.println("계좌개설이 완료되었습니다.");
+				break;
+			case 2:
+				if(banks[custno-1] == null) {
+					System.out.println("계좌를 먼저 생성하세요.");
+					continue;
+				}
+				else {
+					System.out.println("입금하실 금액을 입력하세요:");
+					int d = sc.nextInt();
+					banks[custno-1].deposit(d);
+					System.out.println("입금이 완료되었습니다.");
+					break;
+				}
+				
+			case 3:
+				if(banks[custno-1] == null) {
+					System.out.println("계좌를 먼저 생성하세요.");
+					continue;
+				}
+				else {
+					System.out.println("출금하실 금액을 입력하세요:");
+					int w = sc.nextInt();
+					banks[custno-1].withdraw(w);
+					if(w == -1) {
+						System.out.println("잔액이 부족합니다.");
+						break;
+					}
+					System.out.println("출금이 완료되었습니다.");
+					break;
+				}
+			case 4:
+				if(banks[custno-1] == null) {
+					System.out.println("계좌를 먼저 생성하세요.");
+					continue;
+				}
+				else
+					System.out.println("잔액:"+banks[custno-1].getBalance()); 
+					break;
+					
+			case 9: System.out.println("종료되었습니다."); 
+					System.exit(0);
+			
+			default: System.out.println("입력이 잘못되었습니다.");
+			}
+			
+		
+		
+
+			
+		}
+			
+		
+		
+			
+		
+	}	
+	
+
+}
